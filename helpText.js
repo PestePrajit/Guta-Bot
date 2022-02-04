@@ -1,0 +1,3 @@
+//diferite string-uri foarte lungi
+const helpText = "Comenzi pt replicile botului:\n \n$test Daca merge botul \n \n$craciun vorbe festive \n \n$finally Mihnea poate dormi linistit \n \n$SuntTare Guta graeste vorbe reale \n \n$Mario Chef de Chef \n \n$romania ajuta la geografie \n \n$help SE STIE! \n \n$Top arata melodiile lui Guta \n\n$amogus foarte sus \n\n$dedicatie Dedicatie pentru fratele tau \n \n $Arde-i Sterge max 100 de mesaje \n \n$play pune muzica \n\n$iesi Guta iese de pe canal, dar ai grija \n\n$skip sare peste un cantec \n\n 2022© PestePrajit all rights reserved";
+exports.helpText = helpText;

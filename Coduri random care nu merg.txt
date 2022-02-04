@@ -1,0 +1,40 @@
+/* const queue = player.createQueue(message.guild, {
+                    metadata: {
+                        channel: message.channel,
+                    }
+                });
+                queue
+                const song = await player.search(args.join(" "), {
+                    requestedBy: message.member,
+                }).then(x => x.tracks[0]);
+                message.channel.send("Ia asta am gasit\n" + song.url);
+                           try{                             
+                                if (!queue.connection) {
+                                    await queue.connect(message.member.voice.channel)  
+                                    console.log("Am intrat");
+                                }                          
+                                    queue.addTrack(song);                                                                         
+                                    queue.play(song);  
+                                    console.log(song.requestedBy);                                                                
+                            }
+                            catch(err){
+                                queue.destroy();
+                                console.error(err);
+                                return message.channel.send("Nu stiu frate am incercat sa intru da n-am putut");
+                            }
+                */
+                *async function songFinder(mesaj,args,Player){
+    let result=await searcher.search(args.join(" "), {type: "video"})
+    mesaj.channel.send("Ia asta am gasit\n" + result.first.url);
+    const songInfo=ytdl.getInfo(result.first.url);
+    let song=Player.search(args.join(" "),{
+        requestedBy: mesaj.user
+    }).then(x => x.tracks[0]);
+    return song;
+}*/
+/*player.on("trackStart", (queue, song) =>{
+    queue.metadata.channel.send('Lautarii canta ' + song.title);
+});
+player.on("trackEnd", (queue) =>{
+    queue.play();
+})*/
