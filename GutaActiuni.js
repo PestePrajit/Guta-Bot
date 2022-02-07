@@ -1,14 +1,5 @@
 const Discord = require("discord.js");
-const {YTSearcher} = require('ytsearcher');
-const ytdl = require('ytdl-core');
-const searcher= new YTSearcher({
-    key: "AIzaSyDO26oR1ddAyI-7C1rFIRydwig2susMmDE",
-    reveled: true
-});
-const nuke = (mesaj) =>{
-    Stergator(mesaj);
-}
-async function Stergator(mesaj){
+async function nuke(mesaj) {
     const Stergere= await mesaj.channel.messages.fetch(100);
     mesaj.channel.bulkDelete(Stergere,true);
 }
@@ -61,9 +52,25 @@ function Skip(message, actiune) {
         }
     }
 }
+function Dedicatie(argument, actiune) {
+    if (typeof argument === 'undefined') {
+        actiune.mesaj = "cui vrei sa-i dedici?";
+    }
+    else {
+        if (argument === "andrei") {
+            actiune.mesaj = "Cel mai smecher asta e frate cu mine s-a nascut destept si o mai invatat";
+        }
+        else {
+            actiune.mesaj = `Cel mai smecher asta e frate cu mine se stieeeeee ${argument}`;
+        }
+    }
+    actiune.properties = actiune.properties * 2;
+    console.log("dedicatie");
+}
 module.exports={
     nuke,
     Skip,
     iesi,
-    Play
+    Play,
+    Dedicatie
 }

@@ -1,7 +1,5 @@
-const { gigoloText } = require("./gigoloText");
-const { helpText } = require("./helpText");
-const { Play, iesi, Skip } = require("./GutaActiuni");
-
+const { gigoloText, helpText, orar10B } = require("./StringuriLungi");
+const { Play, iesi, Skip, Dedicatie } = require("./GutaActiuni");
 //command este mesajul argument este argumentul
 const AlegeriReplici = (message,command,argument) =>{
     //obiectul care contine mesajul si proprietatile comenzii
@@ -32,7 +30,7 @@ const AlegeriReplici = (message,command,argument) =>{
             console.log("haha asta nu stie sa foloseasca botu");
             break;
         case "mario":
-            actiune.mesaj="La multi ani Mario!";
+            actiune.mesaj="Nu este ziua lui Mario";
             console.log("Mario se distreaza");
             break;
         case "romania":
@@ -53,19 +51,7 @@ const AlegeriReplici = (message,command,argument) =>{
             break;
         case "dedicatie":
             //daca nu se mentioneaza un argument, se returneaza un mesaj diferit
-            if(typeof argument==='undefined'){
-                actiune.mesaj="cui vrei sa-i dedici?"
-            }
-            else{
-                if(argument==="andrei"){
-                    actiune.mesaj="Cel mai smecher asta e frate cu mine s-a nascut destept si o mai invatat";
-                }
-                else{
-                    actiune.mesaj=`Cel mai smecher asta e frate cu mine se stieeeeee ${argument}`;
-                }                
-            }           
-            actiune.properties=actiune.properties*2;
-            console.log("dedicatie");
+            Dedicatie(argument, actiune);
             break;
         case "arde-i":
             actiune.mesaj="V-am ars";
@@ -82,8 +68,12 @@ const AlegeriReplici = (message,command,argument) =>{
             Skip(message, actiune);
             break;
         case "queue":
-            actiune.mesaj="Ia asta e queue-l\n";
+            actiune.mesaj="Ia asta e queue-ul\n";
             actiune.properties=8;
+            break;
+        case "orar":
+            actiune.mesaj=orar10B;
+            console.log("Asta nu stie orele");
             break;
         default:
             actiune.mesaj="Ba ce drecu vrei";
@@ -95,4 +85,6 @@ const AlegeriReplici = (message,command,argument) =>{
 }
 //Exporteaza replicile
 exports.AlegeriReplici = AlegeriReplici;
+
+
 

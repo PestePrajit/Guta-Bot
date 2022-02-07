@@ -12,13 +12,6 @@ const client = new Discord.Client({ intents: [
     Intents.FLAGS.GUILD_VOICE_STATES,
   ], });
 const { SpotifyPlugin } = require('@distube/spotify')
-
-const ytdl = require('ytdl-core');
-const {YTSearcher} = require('ytsearcher');
-const searcher= new YTSearcher({
-    key: process.env.YTKEY,
-    reveled: true
-});
 client.distube = new DisTube(client, {
     leaveOnStop: false,
     emitNewSongOnly: true,
@@ -33,7 +26,7 @@ client.distube = new DisTube(client, {
 var reactFinishSong=true;
 //porneste bot-ul cu tokenul personal
 client.login(process.env.TOKEN)
-//Da un semn la pornirea bot-ului si update-uri in consola o date pe minut
+//Da un semn la pornirea bot-ului si update-uri in consola o data pe minut
 client.on("ready", () => {
     console.log("Atentiune natiune, intra Guta in actiune");
     setInterval(function(){console.log("Guta este in actiune")},60000);
@@ -67,25 +60,31 @@ client.on("messageCreate", async (message) => {
             }
             break;
         case 4:
+            //comanda de leave
             client.distube.voices.get(message)?.leave()
             message.channel.send(mesajul.mesaj);
             reactFinishSong=false;
             console.log("Guta a iesit de pe canal");
             break;
-        case 5:        
+        case 5:      
+            //comanda de play la melodii
             client.distube.play(message, args.join(" "))                
             break;
         case 6:
+            //leave partea 2, il da afara pe cel care scrie mesajul ca nu e politicos
             message.member.voice.disconnect("bulangiu");
             message.channel.send(mesajul.mesaj);
             break;
         case 7:
+            //comanda de de skip
             try{
+                //Verifica da exista macar 2 cantece in queue
                 const Lista=client.distube.getQueue(message);
                 if (Lista.songs.length<=1){
                     message.channel.send("Bine, dar gen trebuie sa mai fie un cantec in queue ca sa dai skip");
                     return;
                 }
+                //daca exista da skip
                 reactFinishSong=false;
                 client.distube.skip(message);
                 message.channel.send(mesajul.mesaj);
@@ -98,11 +97,13 @@ client.on("messageCreate", async (message) => {
                 break;
             }        
         case 8:
+            //verifica daca exista un queue
             const Lista=client.distube.getQueue(message);
             if(!Lista){
                 message.channel.send("Ba geniule vezi ca n-ai vreun queue");
             }               
             else{
+                //daca exist afiseaza queue-ul
                 message.channel.send(
                     `${mesajul.mesaj}${Lista.songs
                         .map((song, id) => `**${id ? id : "Lautarii canta: "}**. ${song.name} - \`${song.formattedDuration}\``)
