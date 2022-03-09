@@ -141,3 +141,6 @@ client.distube.on("empty", queue =>{
     queue.textChannel.send("bulangii m-ati lasat singur. Da-va dreq");
     console.log("Guta e singur");
 })
+distube.on("error", (channel, error) => channel.send(
+    "An error encountered: " + error
+));
